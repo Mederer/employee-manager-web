@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 function Layout() {
 
@@ -11,13 +11,13 @@ function Layout() {
                 <nav>
                     <ul className="flex justify-center space-x-4">
                         <li>
-                            <a href="/">Home</a>
+                            <Link to="/">Home</Link>
                         </li>
                         <li>
-                            <a href="/employees">View Employees</a>
+                            <Link to="/employees">View Employees</Link>
                         </li>
                         <li>
-                            <a href="/employees/create">Create Employee</a>
+                            <Link to="/employees/create">Create Employee</Link>
                         </li>
                     </ul>
                 </nav>
