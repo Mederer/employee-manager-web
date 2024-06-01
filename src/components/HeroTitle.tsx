@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useGetEmployeesQuery } from "../services/employeeManagerApi";
 
 interface HeroTitleProps {
     title: string;
@@ -6,24 +7,15 @@ interface HeroTitleProps {
 }
 
 function HeroTitle({ title, subtitle }: HeroTitleProps) {
-    const [name, setName] = useState<string>("");
-    const [age, setAge] = useState<number>(0);
+    const { data } = useGetEmployeesQuery();
 
-    useEffect(() => {
-        (async function () {
-            const response = await fetch("/api/employeequeryhandler");
-            const data = await response.json();
-            setName(data.name);
-            setAge(parseInt(data.age) ?? -1);
-        })();
-    }, [])
 
     return (
+
         <div>
             <h1>{title}</h1>
             <h2>{subtitle}</h2>
-            <p>{name}</p>
-            <p>{age}</p>
+            <p>{data?.toString() ?? "Loading"}</p>
         </div>
     );
 }
