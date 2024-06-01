@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useGetEmployeesQuery } from "../services/employeeManagerApi";
 
 interface HeroTitleProps {
