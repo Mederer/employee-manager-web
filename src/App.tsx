@@ -3,6 +3,7 @@ import EmployeeScreen from "./employees/EmployeeScreen"
 import CreateEmployeeScreen from "./employees/CreateEmployeeScreen"
 import Layout from "./components/layout/Layout"
 import HomeScreen from "./components/HomeScreen"
+import EmployeeDetailScreen from "./employees/EmployeeDetailScreen"
 
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
                 <Route element={<Layout />}>
                     <Route index element={<HomeScreen />} />
                     <Route path="/employees" element={<EmployeeScreen />} />
+                    <Route path="/employees/:id" element={<EmployeeDetailScreen />} />
                     <Route path="/employees/create" element={<CreateEmployeeScreen />} />
                 </Route>
             </Routes>

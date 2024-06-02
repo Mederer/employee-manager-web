@@ -1,15 +1,17 @@
+import ScreenTitle from "../components/ScreenTitle";
 import { useGetEmployeesQuery } from "../services/employeeManagerApi";
 import EmployeeList from "./EmployeeList";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 function EmployeeScreen() {
     const { data, isError, isLoading } = useGetEmployeesQuery();
 
     return (
         <div className="flex justify-center w-full m-auto flex-col">
-            <h1 className="text-2xl font-bold mb-4">Employees</h1>
-            <div className="flex flex-col items-center">
+            <ScreenTitle title={"Employees"} />
+            <div className="flex flex-col items-center mt-4">
                 {isLoading
-                    ? <p>Loading...</p>
+                    ? <LoadingSpinner />
                     : isError
                         ? <p>Error</p>
                         : <EmployeeList employees={data || []} />}

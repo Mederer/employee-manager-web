@@ -1,6 +1,8 @@
+import ScreenTitle from "../components/ScreenTitle";
+
 function CreateEmployeeScreen() {
     return <div>
-        <h1>Create Employee</h1>
+        <ScreenTitle title={"Create Employee"} />
     </div>
 }
 

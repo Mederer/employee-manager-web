@@ -4,11 +4,17 @@ import { Employee } from "../employees/types";
 export const employeeManagerApi = createApi({
   reducerPath: "employeeManagerApi",
   baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
+  tagTypes: ["Employee"],
   endpoints: (builder) => ({
     getEmployees: builder.query<Employee[], void>({
       query: () => "employees",
+      providesTags: ["Employee"],
+    }),
+    getEmployee: builder.query<Employee, string>({
+      query: (id) => `employees/${id}`,
+      providesTags: ["Employee"],
     }),
   }),
 });
 
-export const { useGetEmployeesQuery } = employeeManagerApi;
+export const { useGetEmployeesQuery, useGetEmployeeQuery } = employeeManagerApi;

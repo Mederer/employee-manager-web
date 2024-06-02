@@ -1,0 +1,1 @@
+public record CreateEmployeeCommand(string FirstName, string LastName);
