@@ -20,7 +20,8 @@ namespace EmployeeManager.Functions
         {
             CosmosClient cosmosClient = new CosmosClientBuilder(
                 Environment.GetEnvironmentVariable("CosmosAccountEndpoint"),
-                Environment.GetEnvironmentVariable("CosmosAccountKey")).WithSerializerOptions(new CosmosSerializationOptions { PropertyNamingPolicy = CosmosPropertyNamingPolicy.CamelCase }).Build();
+                Environment.GetEnvironmentVariable("CosmosAccountKey")
+            ).WithSerializerOptions(new CosmosSerializationOptions { PropertyNamingPolicy = CosmosPropertyNamingPolicy.CamelCase }).Build();
 
             Container container = cosmosClient.GetContainer("EmployeeDB", "Employees");
             var feedIterator = container.GetItemQueryIterator<Employee>("SELECT * FROM c");
@@ -44,6 +45,26 @@ namespace EmployeeManager.Functions
                 }
                 return new OkObjectResult(employees);
             }
+        }
+
+        public static async Task<IActionResult> GetEmployeeById(string id, Container container)
+        {
+            var employee = await container.ReadItemAsync<Employee>(id, new PartitionKey(id));
+            if (employee.StatusCode == System.Net.HttpStatusCode.NotFound)
+                return new NotFoundResult();
+            return new OkObjectResult(employee.Resource);
+        }
+
+        public static async Task<IActionResult> GetAllEmployees(Container container)
+        {
+            var employees = new List<Employee>();
+            var feedIterator = container.GetItemQueryIterator<Employee>("SELECT * FROM c");
+            while (feedIterator.HasMoreResults)
+            {
+                var response = await feedIterator.ReadNextAsync();
+                employees.AddRange(response);
+            }
+            return new OkObjectResult(employees);
         }
     }
 }
