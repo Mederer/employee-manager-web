@@ -10,11 +10,24 @@ export const employeeManagerApi = createApi({
       query: () => "employees",
       providesTags: ["Employee"],
     }),
+
     getEmployee: builder.query<Employee, string>({
       query: (id) => `employees/${id}`,
       providesTags: ["Employee"],
     }),
+
+    deleteEmployee: builder.mutation<void, string>({
+      query: (id) => ({
+        url: `employees/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Employee"],
+    }),
   }),
 });
 
-export const { useGetEmployeesQuery, useGetEmployeeQuery } = employeeManagerApi;
+export const {
+  useGetEmployeesQuery,
+  useGetEmployeeQuery,
+  useDeleteEmployeeMutation,
+} = employeeManagerApi;
