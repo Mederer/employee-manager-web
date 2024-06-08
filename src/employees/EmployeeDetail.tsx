@@ -16,7 +16,7 @@ function EmployeeDetail({ employee }: EmployeeDetailProps) {
     const handleDelete = () => {
         console.log(`Deleting employee with ID ${employee.id}`);
         deleteEmployee(employee.id);
-    }
+    };
 
     useEffect(() => {
         if (result.isSuccess) {
@@ -25,27 +25,28 @@ function EmployeeDetail({ employee }: EmployeeDetailProps) {
         }
     }, [navigate, result]);
 
-    return <div className="bg-slate-300 p-2 w-full rounded shadow grid grid-cols-1 gap-4 relative">
-        <div>
-            <div className="font-bold">ID</div>
+    return (
+        <div className="relative grid w-full grid-cols-1 gap-4 rounded bg-slate-300 p-2 shadow">
             <div>
-                {employee.id}
+                <div className="font-bold">ID</div>
+                <div>{employee.id}</div>
             </div>
-        </div>
-        <div>
-            <div className="font-bold">First Name</div>
             <div>
-                {employee.firstName}
+                <div className="font-bold">First Name</div>
+                <div>{employee.firstName}</div>
             </div>
-        </div>
-        <div>
-            <div className="font-bold">Last Name</div>
             <div>
-                {employee.lastName}
+                <div className="font-bold">Last Name</div>
+                <div>{employee.lastName}</div>
             </div>
+            <FontAwesomeIcon
+                onClick={handleDelete}
+                icon={faTrash}
+                className="absolute right-0 top-0 mr-4 mt-4 cursor-pointer text-red-500"
+                size="lg"
+            />
         </div>
-        <FontAwesomeIcon onClick={handleDelete} icon={faTrash} className="absolute right-0 top-0 mr-4 mt-4 text-red-500 cursor-pointer" size="lg" />
-    </div>
+    );
 }
 
 export default EmployeeDetail;

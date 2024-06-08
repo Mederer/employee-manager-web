@@ -23,6 +23,14 @@ export const employeeManagerApi = createApi({
       }),
       invalidatesTags: ["Employee"],
     }),
+    createEmployee: builder.mutation<Employee, Partial<Employee>>({
+      query: (body) => ({
+        url: `employees`,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Employee"],
+    }),
   }),
 });
 
@@ -30,4 +38,5 @@ export const {
   useGetEmployeesQuery,
   useGetEmployeeQuery,
   useDeleteEmployeeMutation,
+  useCreateEmployeeMutation,
 } = employeeManagerApi;
